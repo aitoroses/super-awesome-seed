@@ -60,6 +60,7 @@ module.exports = {
     root: [path.resolve('node_modules'), path.resolve('src/lib'), path.resolve('src')],
     extensions: [
       '', '.js', '.jsx',
+      '.ts', '.tsx',
       '.css',
       '.woff', '.woff2', '.ttf', '.eot', '.svg'
     ],

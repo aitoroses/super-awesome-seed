@@ -1,7 +1,9 @@
-import React from 'react'
+import * as React from 'react'
 
-class HelloWorld extends React.Component {
+class HelloWorld extends React.Component<any, any> {
+
   render() {
+
     return (
       <main>
         <h3>

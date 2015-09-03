@@ -14,14 +14,16 @@
         "./**/*.ts",
         "!./node_modules/**/*.ts",
         "./**/*.tsx",
-        "!./node_modules/**/*.tsx"
+        "!./node_modules/**/*.tsx",
+        "!./lib"
     ],
     "files": [
         "./typings/react-router/react-router.d.ts",
         "./typings/react/react-addons.d.ts",
         "./typings/react/react.d.ts",
         "./typings/redux/redux.d.ts",
-        "./typings/tsd.d.ts"
+        "./typings/tsd.d.ts",
+        "./src/components/App.tsx"
     ],
     "compileOnSave": false,
     "formatCodeOptions": {
