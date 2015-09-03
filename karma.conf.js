@@ -1,26 +1,26 @@
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require('webpack')
+var path = require('path')
 
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
 
     browserNoActivityTimeout: 30000,
 
-    browsers: [ process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome' ],
+    browsers: [process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome'],
 
     singleRun: process.env.CONTINUOUS_INTEGRATION === 'true',
 
-    frameworks: [ 'mocha', 'sinon-chai' ],
+    frameworks: ['mocha', 'sinon-chai'],
 
     files: [
       'tests.webpack.js'
     ],
 
     preprocessors: {
-      'tests.webpack.js': [ 'webpack', 'sourcemap' ]
+      'tests.webpack.js': ['webpack', 'sourcemap']
     },
 
-    reporters: [ 'mocha' ],
+    reporters: ['mocha'],
 
     webpack: {
       devtool: '#inline-source-map',
@@ -35,8 +35,8 @@ module.exports = function (config) {
         })
       ],
       resolve: {
-          root: [path.resolve("node_modules")],
-          extensions: ['', '.js', '.jsx',],
+        root: [path.resolve('node_modules')],
+        extensions: ['', '.js', '.jsx',],
       }
     },
 
@@ -44,5 +44,5 @@ module.exports = function (config) {
       noInfo: true
     }
 
-  });
-};
+  })
+}

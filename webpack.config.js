@@ -1,10 +1,13 @@
-var webpack = require('webpack')
-var path = require('path')
+'use strict'
 
-var pathToReact = path.resolve('node_modules/react/dist/react-with-addons.min.js')
-var pathToRouter = path.resolve('node_modules/react-router/umd/ReactRouter.min.js')
+let webpack = require('webpack')
+let path = require('path')
 
-var plugins = [
+let pathToReact = path.resolve('node_modules/react/dist/react-with-addons.min.js')
+let pathToRouter = path.resolve('node_modules/react-router/umd/ReactRouter.min.js')
+let pathToRedux = path.resolve('node_modules/redux/dist/redux.min.js')
+
+let plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     __DEV__: JSON.stringify(process.env.DEBUG)
@@ -36,6 +39,7 @@ module.exports = {
     ],
     loaders: [
       { test: /\.(js|jsx)$/, loaders: ['react-hot', 'babel?stage=0'], exclude: /node_modules/ },
+      { test: /\.ts(x?)$/, loader: 'ts-loader', exclude: /node_modules/ },
       { test: /node_modules.*\.css$/, loaders: ['style', 'css'], exclude: /node_modules/ },
       { test: /\.css$/, loaders: ['style', 'css', 'postcss']},
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&minetype=application/font-woff' },
@@ -44,10 +48,11 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' }
     ],
     noParse: [
-      /* Regex */
+      /* Regex ot path */
       pathToReact,
+      pathToRedux
 
-      // pathToRouter
+      // pathToRouter will generate an undefined call to 'require'
     ]
   },
 
@@ -61,13 +66,18 @@ module.exports = {
     alias: {
       react: 'react/addons',
       'react/addons': pathToReact,
-      'react-router': pathToRouter
+      'react-router': pathToRouter,
+      redux: pathToRedux
     }
   },
 
   plugins: plugins,
 
   devtool: process.env.COMPRESS ? null : 'inline-source-map',
+
+  ts: {
+    compiler: 'typescript'
+  },
 
   postcss: function() {
     return {

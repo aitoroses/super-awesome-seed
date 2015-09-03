@@ -47,6 +47,8 @@
     "rucksack-css": "^0.6.7",
     "script-loader": "^0.6.1",
     "style-loader": "^0.12.3",
+    "ts-loader": "^0.5.3",
+    "typescript": "^1.7.0-dev.20150903",
     "url": "^0.10.3",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.0",
