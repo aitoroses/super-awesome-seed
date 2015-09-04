@@ -23,7 +23,10 @@
         "./typings/react/react.d.ts",
         "./typings/redux/redux.d.ts",
         "./typings/tsd.d.ts",
-        "./src/components/App.tsx"
+        "./src/components/App.tsx",
+        "./src/components/MainHandler.tsx",
+        "./src/components/NotFound.tsx",
+        "./src/index.tsx"
     ],
     "compileOnSave": false,
     "formatCodeOptions": {
