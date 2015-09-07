@@ -1,10 +1,21 @@
-import React from 'react'
-import { ENTER_KEY, ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from './constants'
+import * as React from 'react'
+import { ENTER_KEY, ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants/constants'
 import TodoItem from './TodoItem'
 import TodoFooter from './TodoFooter'
-import Utils from './Utils'
+import Utils from '../Utils'
 
-export default class TodoApp extends React.Component {
+import TodoModel from './TodoModel'
+
+export interface Props {
+  model: TodoModel
+}
+
+export interface State {
+  nowShowing?: string
+  editing?: boolean
+}
+
+export default class TodoApp extends React.Component<Props, State> {
 
   state = {
     nowShowing: ALL_TODOS,
@@ -19,15 +30,16 @@ export default class TodoApp extends React.Component {
 
     event.preventDefault()
 
-    let val = React.findDOMNode(this.refs.newField).value.trim()
+    let val = (React.findDOMNode((this.refs as any).newField) as any).value.trim()
 
     if (val) {
       this.props.model.addTodo(val)
-      React.findDOMNode(this.refs.newField).value = ''
+      var node: any = React.findDOMNode((this.refs as any).newField)
+      node.value = ''
     }
   }
 
-  handleFilterTodos(name) {
+  handleFilterTodos(name: string) {
     this.setState({nowShowing: name})
   }
 
@@ -76,8 +88,8 @@ export default class TodoApp extends React.Component {
           count={activeTodoCount}
           completedCount={completedCount}
           nowShowing={this.state.nowShowing}
-          onClearCompleted={::this.handleClearCompleted}
-          onFilterTodos={::this.handleFilterTodos}
+          onClearCompleted={this.handleClearCompleted.bind(this)}
+          onFilterTodos={this.handleFilterTodos.bind(this)}
         />
     }
 
@@ -124,7 +136,7 @@ export default class TodoApp extends React.Component {
           <input
             className='toggle-all'
             type='checkbox'
-            onChange={::this.handleToggleAll}
+            onChange={this.handleToggleAll.bind(this)}
             checked={activeTodoCount === 0}
           />
           <ul className='todo-list'>
@@ -148,7 +160,7 @@ export default class TodoApp extends React.Component {
             ref='newField'
             className='new-todo'
             placeholder='What needs to be done?'
-            onKeyDown={::this.handleNewTodoKeyDown}
+            onKeyDown={this.handleNewTodoKeyDown.bind(this)}
             autoFocus={true}
           />
         </header>

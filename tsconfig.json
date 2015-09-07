@@ -18,6 +18,12 @@
         "!./lib"
     ],
     "files": [
+        "./src/Utils.ts",
+        "./src/components/TodoModel.ts",
+        "./src/constants/constants.ts",
+        "./typings/axios/axios.d.ts",
+        "./typings/classnames/classnames.d.ts",
+        "./typings/es6-promise/es6-promise.d.ts",
         "./typings/react-router/react-router.d.ts",
         "./typings/react/react-addons.d.ts",
         "./typings/react/react.d.ts",
@@ -26,6 +32,10 @@
         "./src/components/App.tsx",
         "./src/components/MainHandler.tsx",
         "./src/components/NotFound.tsx",
+        "./src/components/TodoApp.tsx",
+        "./src/components/TodoFooter.tsx",
+        "./src/components/TodoItem.tsx",
+        "./src/components/TodoWrap.tsx",
         "./src/index.tsx"
     ],
     "compileOnSave": false,

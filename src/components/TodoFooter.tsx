@@ -1,8 +1,17 @@
-import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from './constants'
-import Utils from './Utils'
-import cx from 'classnames'
+import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants/constants'
+import Utils from '../Utils'
+import cx = require("classnames")
+import * as React from 'react'
 
-export default class TodoFooter extends React.Component {
+export interface Props {
+  onFilterTodos: Function
+  onClearCompleted: Function
+  count: number
+  completedCount: number
+  nowShowing: string
+}
+
+export default class TodoFooter extends React.Component<Props, {}> {
 
   handleFilterTodos(name) {
     this.props.onFilterTodos(name)
@@ -16,7 +25,7 @@ export default class TodoFooter extends React.Component {
       clearButton = (
         <button
           className='clear-completed'
-          onClick={::this.props.onClearCompleted}>
+          onClick={this.props.onClearCompleted.bind(this)}>
           Clear completed
         </button>
       )

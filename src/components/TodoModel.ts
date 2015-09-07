@@ -1,10 +1,23 @@
-import axios from 'axios'
-import React from 'react'
+declare var global
 
-import Utils from './Utils'
+import * as axios from 'axios'
+import * as React from 'react'
+
+import Utils from '../Utils'
+
+export interface Todo {
+  completed: boolean
+  id: string
+  title: string
+}
 
 export default class TodoModel {
-  constructor(key) {
+
+  key: string
+  todos: Todo[]
+  onChanges: Function[]
+
+  constructor(key: string) {
     this.key = key
     this.todos = []
     this.onChanges = []
@@ -12,9 +25,8 @@ export default class TodoModel {
   }
 
   getAllTodosFromDB() {
-    axios.get(global.__config__.apiUrl + '/todos')
+    axios.get<Todo[]>(global.__config__.apiUrl + '/todos')
       .then(({data: body}) => {
-        console.log(body)
         this.todos = body
         this.onChanges.forEach(cb => cb())
       })
@@ -24,7 +36,7 @@ export default class TodoModel {
     axios.post(global.__config__.apiUrl + '/todos', this.todos)
   }
 
-  subscribe(onChange) {
+  subscribe(onChange: Function) {
     this.onChanges.push(onChange)
   }
 
@@ -33,7 +45,7 @@ export default class TodoModel {
     this.onChanges.forEach(cb => cb())
   }
 
-  addTodo(title) {
+  addTodo(title: string) {
     this.todos = this.todos.concat({
       id: Utils.uuid(),
       title: title,
@@ -43,7 +55,7 @@ export default class TodoModel {
     this.inform()
   }
 
-  toggleAll(checked) {
+  toggleAll(checked: boolean) {
     // Note: it's usually better to use immutable data structures since they're
     // easier to reason about and React works very well with them. That's why
     // we use map() and filter() everywhere instead of mutating the array or
@@ -55,7 +67,7 @@ export default class TodoModel {
     this.inform()
   }
 
-  toggle(todoToToggle) {
+  toggle(todoToToggle: Todo) {
     this.todos = this.todos.map(todo => {
       return todo !== todoToToggle ?
         todo :

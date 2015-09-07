@@ -5,7 +5,7 @@ import TodoModel from './TodoModel'
 
 var model = new TodoModel('react-todos')
 
-class TodoWrap extends React.Component {
+class TodoWrap extends React.Component<any, any> {
 
   componentDidMount() {
     model.subscribe(this.forceUpdate.bind(this))
@@ -15,7 +15,6 @@ class TodoWrap extends React.Component {
     return (
       <div className='todoapp'>
         <TodoApp model={model}/>
-
       </div>
     )
   }

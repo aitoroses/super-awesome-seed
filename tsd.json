@@ -13,6 +13,15 @@
     },
     "redux/redux.d.ts": {
       "commit": "d2bab5738b84b91d8ee18a68c7b379a9714cf82f"
+    },
+    "es6-promise/es6-promise.d.ts": {
+      "commit": "bb051830df88f5a55dcf06b7fe85bf6b62cc97f2"
+    },
+    "axios/axios.d.ts": {
+      "commit": "bb051830df88f5a55dcf06b7fe85bf6b62cc97f2"
+    },
+    "classnames/classnames.d.ts": {
+      "commit": "bb051830df88f5a55dcf06b7fe85bf6b62cc97f2"
     }
   }
 }

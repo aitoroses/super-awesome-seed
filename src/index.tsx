@@ -6,17 +6,13 @@ const {Route, RouteHandler, DefaultRoute, NotFoundRoute} = Router
 // Import application handlers
 import MainHandler from 'components/MainHandler';
 import NotFound from 'components/NotFound'
-import App from 'components/App'
-
-declare var require
-var TodoApp = require('./TodoApp/TodoWrap')
+import TodoApp from 'components/TodoWrap'
 
 // Define Routes
 const routes = (
   <Route handler={MainHandler} path='/'>
-    <DefaultRoute handler={App}/>
+    <DefaultRoute handler={TodoApp}/>
     <NotFoundRoute handler={NotFound}/>
-    <Route name='todo-app' path='/todos' handler={TodoApp}/>
   </Route>
 )
 

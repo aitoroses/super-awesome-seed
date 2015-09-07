@@ -1,5 +1,6 @@
-class Utils {
-  uuid() {
+module Utils {
+
+  export function uuid(): string {
     let i
     let random
     let uuid = ''
@@ -17,25 +18,25 @@ class Utils {
     return uuid
   }
 
-  pluralize(count, word) {
+  export function pluralize(count: number, word: string): string {
     return count === 1 ? word : word + 's'
   }
 
-  store(namespace, data) {
+  export function store<T>(namespace: string, data: Array<T>): any {
     if (data) {
       return localStorage.setItem(namespace, JSON.stringify(data))
     }
 
     var store = localStorage.getItem(namespace)
-    return (store && JSON.parse(store)) || []
+    return ((store && JSON.parse(store)) || []) as T[]
   }
 
-  extend() {
+  export function extend(...args): any {
     let i
     let key
     let newObj = {}
 
-    for (i = 0; i < arguments.length; i++) {
+    for (i = 0; i < args.length; i++) {
       var obj = arguments[i]
       for (key in obj) {
         if (obj.hasOwnProperty(key)) {
@@ -48,4 +49,4 @@ class Utils {
   }
 }
 
-export default new Utils()
+export default Utils

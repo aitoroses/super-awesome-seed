@@ -1,6 +1,9 @@
-import cx from 'classnames'
+import * as React from 'react'
+import cx = require("classnames");
 
-export default class TodoItem extends React.Component {
+import {ESCAPE_KEY, ENTER_KEY} from '../constants/constants'
+
+export default class TodoItem extends React.Component<any, any> {
   state = {
     editText: this.props.todo.title
   }
@@ -56,7 +59,7 @@ export default class TodoItem extends React.Component {
    */
   componentDidUpdate(prevProps) {
     if (!prevProps.editing && this.props.editing) {
-      var node = React.findDOMNode(this.refs.editField)
+      var node: any = React.findDOMNode((this.refs as any).editField)
       node.focus()
       node.setSelectionRange(node.value.length, node.value.length)
     }
@@ -83,7 +86,7 @@ export default class TodoItem extends React.Component {
         <input
           ref='editField'
           className='edit'
-          value={this.state.editText}
+          value={this.state.editText + ' hey!'}
           onBlur={this.handleSubmit}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
