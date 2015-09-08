@@ -6,16 +6,20 @@ import {ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS} from 'constants/TodoFilters'
 import TodoItem from './TodoItem'
 import TodoFooter from './TodoFooter'
 
+import * as TodoActions from 'actions/todos'
+import {Todo} from 'reducers/todos'
+
 import Utils from 'Utils'
-import TodoModel from 'model/TodoModel'
 
 export interface Props {
-  model: TodoModel
+  actions: typeof TodoActions
+  visibilityFilter: string
+  todos: Todo[]
 }
 
 export interface State {
   nowShowing?: string
-  editing?: boolean
+  editing?: Todo
 }
 
 export default class TodoApp extends React.Component<Props, State> {
@@ -36,7 +40,7 @@ export default class TodoApp extends React.Component<Props, State> {
     let val = (React.findDOMNode((this.refs as any).newField) as any).value.trim()
 
     if (val) {
-      this.props.model.addTodo(val)
+      this.props.actions.addTodo(val)
       var node: any = React.findDOMNode((this.refs as any).newField)
       node.value = ''
     }
@@ -48,23 +52,23 @@ export default class TodoApp extends React.Component<Props, State> {
 
   handleToggleAll(event) {
     let checked = event.target.checked
-    this.props.model.toggleAll(checked)
+    this.props.actions.completeAll()
   }
 
-  toggle(todoToToggle) {
-    this.props.model.toggle(todoToToggle)
+  toggle(todoToToggle: Todo) {
+    this.props.actions.completeTodo(todoToToggle)
   }
 
-  destroy(todo) {
-    this.props.model.destroy(todo)
+  destroy(todo: Todo) {
+    this.props.actions.deleteTodo(todo)
   }
 
-  edit(todo) {
-    this.setState({editing: todo.id})
+  edit(todo: Todo) {
+    this.setState({editing: todo})
   }
 
-  save(todoToSave, text) {
-    this.props.model.save(todoToSave, text)
+  save(todoToSave: Todo, text) {
+    this.props.actions.editTodo(todoToSave, text)
     this.setState({editing: null})
   }
 
@@ -73,12 +77,12 @@ export default class TodoApp extends React.Component<Props, State> {
   }
 
   handleClearCompleted() {
-    this.props.model.clearCompleted()
+    this.props.actions.clearCompleted()
   }
 
   renderFooter() {
     let footer
-    let todos = this.props.model.todos
+    let todos = this.props.todos
     let activeTodoCount = todos.reduce((accum, todo) => {
       return todo.completed ? accum : accum + 1
     }, 0)
@@ -101,7 +105,7 @@ export default class TodoApp extends React.Component<Props, State> {
 
   renderMain() {
     let main
-    let todos = this.props.model.todos
+    let todos = this.props.todos
 
     let activeTodoCount = todos.reduce((accum, todo) => {
       return todo.completed ? accum : accum + 1
@@ -126,9 +130,9 @@ export default class TodoApp extends React.Component<Props, State> {
           onToggle={this.toggle.bind(this, todo)}
           onDestroy={this.destroy.bind(this, todo)}
           onEdit={this.edit.bind(this, todo)}
-          editing={this.state.editing === todo.id}
+          editing={this.state.editing === todo}
           onSave={this.save.bind(this, todo)}
-          onCancel={this.cancel}
+          onCancel={this.cancel.bind(this)}
         />
       )
     })

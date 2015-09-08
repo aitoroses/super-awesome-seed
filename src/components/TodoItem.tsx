@@ -4,6 +4,7 @@ import cx = require("classnames");
 import {ESCAPE_KEY, ENTER_KEY} from 'constants/KeyboardKeys'
 
 export default class TodoItem extends React.Component<any, any> {
+
   state = {
     editText: this.props.todo.title
   }
@@ -76,9 +77,9 @@ export default class TodoItem extends React.Component<any, any> {
             className='toggle'
             type='checkbox'
             checked={this.props.todo.completed}
-            onChange={this.props.onToggle}
+            onChange={this.props.onToggle.bind(this)}
           />
-          <label onDoubleClick={this.handleEdit}>
+          <label onDoubleClick={this.handleEdit.bind(this)}>
             {this.props.todo.title}
           </label>
           <button className='destroy' onClick={this.props.onDestroy} />
@@ -86,10 +87,10 @@ export default class TodoItem extends React.Component<any, any> {
         <input
           ref='editField'
           className='edit'
-          value={this.state.editText + ' hey!'}
-          onBlur={this.handleSubmit}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
+          value={this.state.editText}
+          onBlur={this.handleSubmit.bind(this)}
+          onChange={this.handleChange.bind(this)}
+          onKeyDown={this.handleKeyDown.bind(this)}
         />
       </li>
     )

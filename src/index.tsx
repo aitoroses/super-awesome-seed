@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as Router from 'react-router'
+import { Provider } from 'react-redux'
 
 const {Route, RouteHandler, DefaultRoute, NotFoundRoute} = Router
 
@@ -8,7 +9,10 @@ import MainHandler from 'components/MainHandler';
 import NotFound from 'components/NotFound'
 
 // Import Todo Container
-import TodoApp from 'containers/TodoApp'
+import TodoApp from 'containers/App'
+import configureStore from 'store/configureStore';
+
+const store = configureStore()
 
 // Define Routes
 const routes = (
@@ -21,7 +25,9 @@ const routes = (
 // Run the app
 Router.run(routes, Router.HashLocation, (Handler, state) => {
   React.render(
-    <Handler/>,
-    document.getElementById('main')
+    <Provider store={store}>
+      {() => <Handler/>}
+    </Provider>,
+    document.getElementById('root')
   )
 })
