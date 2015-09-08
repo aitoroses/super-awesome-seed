@@ -30,23 +30,27 @@ export default function todos(todos = initialState, action?: Action): Todo[] {
     }, ...todos]
 
   case DELETE_TODO:
-    return todos.filter(todo =>
-      action.todo !== todo
-    )
+    var i = todos.indexOf(action.todo)
+    return [
+      ...todos.slice(0, i),
+      ...todos.slice(i + 1)
+    ]
 
   case EDIT_TODO:
-    return todos.map(todo =>
-      todo === action.todo ?
-      Utils.extend({}, todo, {title: action.text}) :
-      todo
-    )
+    var i = todos.indexOf(action.todo)
+    return [
+      ...todos.slice(0, i),
+      Utils.extend({}, action.todo, {title: action.text}),
+      ...todos.slice(i + 1)
+    ]
 
   case COMPLETE_TODO:
-    return todos.map(todo =>
-      todo === action.todo ?
-      Utils.extend({}, todo, {completed: !todo.completed}) :
-      todo
-    )
+    var i = todos.indexOf(action.todo)
+    return [
+      ...todos.slice(0, i),
+      Utils.extend({}, action.todo, {completed: !action.todo.completed}),
+      ...todos.slice(i + 1)
+    ]
 
   case COMPLETE_ALL:
     const areAllMarked: boolean = todos.every(todo => todo.completed)
