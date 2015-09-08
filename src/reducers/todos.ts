@@ -3,13 +3,15 @@ import Utils from 'Utils'
 
 export interface Action {
   type: string
-  todo: Todo
+  id: TodoID
   text: string
 }
 
+export type TodoID = string
+
 export interface Todo {
   completed: boolean
-  id: string
+  id: TodoID
   title: string
 }
 
@@ -21,8 +23,10 @@ const initialState: Todo[] = [{
 
 export default function todos(todos = initialState, action?: Action): Todo[] {
 
+  var todo = todos.filter(todo => action.id === todo.id)[0]
   switch(action.type) {
   case ADD_TODO:
+
     return [{
       id: Utils.uuid(),
       completed: false,
@@ -30,27 +34,29 @@ export default function todos(todos = initialState, action?: Action): Todo[] {
     }, ...todos]
 
   case DELETE_TODO:
-    var i = todos.indexOf(action.todo)
+    var i = todos.indexOf(todo)
     return [
       ...todos.slice(0, i),
       ...todos.slice(i + 1)
     ]
 
   case EDIT_TODO:
-    var i = todos.indexOf(action.todo)
+    var i = todos.indexOf(todo)
     return [
       ...todos.slice(0, i),
-      Utils.extend({}, action.todo, {title: action.text}),
+      Utils.extend({}, todo, {title: action.text}),
       ...todos.slice(i + 1)
     ]
 
   case COMPLETE_TODO:
-    var i = todos.indexOf(action.todo)
-    return [
+    var i = todos.indexOf(todo)
+    var result = [
       ...todos.slice(0, i),
-      Utils.extend({}, action.todo, {completed: !action.todo.completed}),
+      Utils.extend({}, todo, {completed: !todo.completed}),
       ...todos.slice(i + 1)
     ]
+
+    return result
 
   case COMPLETE_ALL:
     const areAllMarked: boolean = todos.every(todo => todo.completed)

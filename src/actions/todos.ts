@@ -1,20 +1,20 @@
 import * as types from 'constants/ActionTypes';
-import {Todo} from '../reducers/todos'
+import {Todo, TodoID} from '../reducers/todos'
 
 export function addTodo(text) {
   return { type: types.ADD_TODO, text };
 }
 
-export function deleteTodo(todo: Todo) {
-  return { type: types.DELETE_TODO, todo };
+export function deleteTodo(id: TodoID) {
+  return { type: types.DELETE_TODO, id };
 }
 
-export function editTodo(todo: Todo, text) {
-  return { type: types.EDIT_TODO, todo, text };
+export function editTodo(id: TodoID, text) {
+  return { type: types.EDIT_TODO, id, text };
 }
 
-export function completeTodo(todo: Todo) {
-  return { type: types.COMPLETE_TODO, todo };
+export function completeTodo(id: TodoID) {
+  return { type: types.COMPLETE_TODO, id };
 }
 
 export function completeAll() {

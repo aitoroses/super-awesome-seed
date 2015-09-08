@@ -7,7 +7,7 @@ import TodoItem from './TodoItem'
 import TodoFooter from './TodoFooter'
 
 import * as TodoActions from 'actions/todos'
-import {Todo} from 'reducers/todos'
+import {Todo, TodoID} from 'reducers/todos'
 
 import Utils from 'Utils'
 
@@ -19,7 +19,7 @@ export interface Props {
 
 export interface State {
   nowShowing?: string
-  editing?: Todo
+  editing?: TodoID
 }
 
 export default class TodoApp extends React.Component<Props, State> {
@@ -55,19 +55,19 @@ export default class TodoApp extends React.Component<Props, State> {
     this.props.actions.completeAll()
   }
 
-  toggle(todoToToggle: Todo) {
+  toggle(todoToToggle: TodoID) {
     this.props.actions.completeTodo(todoToToggle)
   }
 
-  destroy(todo: Todo) {
+  destroy(todo: TodoID) {
     this.props.actions.deleteTodo(todo)
   }
 
-  edit(todo: Todo) {
+  edit(todo: TodoID) {
     this.setState({editing: todo})
   }
 
-  save(todoToSave: Todo, text) {
+  save(todoToSave: TodoID, text) {
     this.props.actions.editTodo(todoToSave, text)
     this.setState({editing: null})
   }
@@ -123,15 +123,16 @@ export default class TodoApp extends React.Component<Props, State> {
     })
 
     let todoItems = shownTodos.map(todo => {
+      let id: TodoID = todo.id
       return (
         <TodoItem
           key={todo.id}
           todo={todo}
-          onToggle={this.toggle.bind(this, todo)}
-          onDestroy={this.destroy.bind(this, todo)}
-          onEdit={this.edit.bind(this, todo)}
-          editing={this.state.editing === todo}
-          onSave={this.save.bind(this, todo)}
+          onToggle={this.toggle.bind(this, id)}
+          onDestroy={this.destroy.bind(this, id)}
+          onEdit={this.edit.bind(this, id)}
+          editing={this.state.editing === id}
+          onSave={this.save.bind(this, id)}
           onCancel={this.cancel.bind(this)}
         />
       )
