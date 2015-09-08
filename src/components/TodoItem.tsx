@@ -1,7 +1,7 @@
 import * as React from 'react'
 import cx = require("classnames");
 
-import {ESCAPE_KEY, ENTER_KEY} from '../constants/constants'
+import {ESCAPE_KEY, ENTER_KEY} from 'constants/KeyboardKeys'
 
 export default class TodoItem extends React.Component<any, any> {
   state = {

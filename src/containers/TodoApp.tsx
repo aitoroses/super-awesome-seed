@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import TodoApp from './TodoApp'
-import TodoModel from './TodoModel'
+import TodoApp from 'components/TodoApp'
+import TodoModel from 'model/TodoModel'
 
 var model = new TodoModel('react-todos')
 

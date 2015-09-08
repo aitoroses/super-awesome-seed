@@ -6,7 +6,9 @@ const {Route, RouteHandler, DefaultRoute, NotFoundRoute} = Router
 // Import application handlers
 import MainHandler from 'components/MainHandler';
 import NotFound from 'components/NotFound'
-import TodoApp from 'components/TodoWrap'
+
+// Import Todo Container
+import TodoApp from 'containers/TodoApp'
 
 // Define Routes
 const routes = (

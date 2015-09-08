@@ -1,7 +1,9 @@
-import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants/constants'
-import Utils from '../Utils'
-import cx = require("classnames")
+import {ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS} from 'constants/TodoFilters'
+
 import * as React from 'react'
+import cx = require("classnames")
+
+import Utils from '../Utils'
 
 export interface Props {
   onFilterTodos: Function

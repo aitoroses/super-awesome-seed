@@ -1,10 +1,13 @@
 import * as React from 'react'
-import { ENTER_KEY, ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants/constants'
+
+import {ENTER_KEY} from 'constants/KeyboardKeys'
+import {ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS} from 'constants/TodoFilters'
+
 import TodoItem from './TodoItem'
 import TodoFooter from './TodoFooter'
-import Utils from '../Utils'
 
-import TodoModel from './TodoModel'
+import Utils from 'Utils'
+import TodoModel from 'model/TodoModel'
 
 export interface Props {
   model: TodoModel
