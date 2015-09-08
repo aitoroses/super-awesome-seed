@@ -37,6 +37,7 @@
         "./typings/react-router/react-router.d.ts",
         "./typings/react/react-addons.d.ts",
         "./typings/react/react.d.ts",
+        "./typings/redux-devtools/redux-devtools.d.ts",
         "./typings/redux/redux.d.ts",
         "./typings/tsd.d.ts",
         "./src/components/MainHandler.tsx",

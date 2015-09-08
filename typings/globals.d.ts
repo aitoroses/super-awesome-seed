@@ -3,3 +3,5 @@ declare var require: {
 }
 
 declare var module: any
+
+declare var __DEV__
