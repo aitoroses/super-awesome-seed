@@ -5,3 +5,7 @@ declare var require: {
 declare var module: any
 
 declare var __DEV__
+
+interface Object {
+  assign: Function
+}
