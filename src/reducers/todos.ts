@@ -2,7 +2,6 @@ import { ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, COMPLETE_ALL, CLEAR_CO
 import Utils from 'Utils'
 
 export interface Action {
-  id: string
   type: string
   todo: Todo
   text: string
