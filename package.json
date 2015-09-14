@@ -11,7 +11,6 @@
     "build": "rm -rf build && NODE_ENV=production COMPRESS=1 webpack lib/main.js  && echo \"gzipped, the global build is `gzip -c build/bundle.js | wc -c` bytes\"",
     "test": "./node_modules/.bin/karma start",
     "dev": "DEBUG=true node server.dev.js",
-    "mock-server": "node test/mock-server.js",
     "todo-server": "node test/todo-server.js"
   },
   "author": "Grayfox",

@@ -8,7 +8,7 @@ import {Todo} from '../reducers/todos'
 import * as TodoActions from '../actions/todos'
 
 export interface Props {
-  todos: Array<any>
+  todos: Array<Todo>
   visibilityFilter: string
   dispatch: Redux.Dispatch
 }
