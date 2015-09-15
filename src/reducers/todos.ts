@@ -45,7 +45,7 @@ export default function todos(todos = initialState, action?: Action): Todo[] {
     var i = todos.indexOf(todo)
     return [
       ...todos.slice(0, i),
-      Object.assign({}, todo, {title: action.text}),
+      Utils.extend({}, todo, {title: action.text}),
       ...todos.slice(i + 1)
     ]
 
@@ -53,7 +53,7 @@ export default function todos(todos = initialState, action?: Action): Todo[] {
     var i = todos.indexOf(todo)
     return [
       ...todos.slice(0, i),
-      Object.assign({}, todo, {completed: !todo.completed}),
+      Utils.extend({}, todo, {completed: !todo.completed}),
       ...todos.slice(i + 1)
     ]
 
