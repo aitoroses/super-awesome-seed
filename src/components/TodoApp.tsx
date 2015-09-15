@@ -9,10 +9,14 @@ import TodoFooter from './TodoFooter'
 import * as TodoActions from 'actions/todos'
 import {Todo, TodoID} from 'reducers/todos'
 
+import * as FilterActions from 'actions/visibilityFilters'
+
+
 import Utils from 'Utils'
 
 export interface Props {
   actions: typeof TodoActions
+  filterActions: typeof FilterActions
   visibilityFilter: string
   todos: Todo[]
 }
@@ -25,7 +29,6 @@ export interface State {
 export default class TodoApp extends React.Component<Props, State> {
 
   state = {
-    nowShowing: ALL_TODOS,
     editing: null
   }
 
@@ -46,8 +49,8 @@ export default class TodoApp extends React.Component<Props, State> {
     }
   }
 
-  handleFilterTodos(name: string) {
-    this.setState({nowShowing: name})
+  handleFilterTodos(filter: string) {
+    this.props.filterActions.setFilter(filter)
   }
 
   handleToggleAll(event) {
@@ -94,7 +97,7 @@ export default class TodoApp extends React.Component<Props, State> {
         <TodoFooter
           count={activeTodoCount}
           completedCount={completedCount}
-          nowShowing={this.state.nowShowing}
+          nowShowing={this.props.visibilityFilter}
           onClearCompleted={this.handleClearCompleted.bind(this)}
           onFilterTodos={this.handleFilterTodos.bind(this)}
         />
@@ -112,7 +115,7 @@ export default class TodoApp extends React.Component<Props, State> {
     }, 0)
 
     let shownTodos = todos.filter((todo) => {
-      switch (this.state.nowShowing) {
+      switch (this.props.visibilityFilter) {
       case ACTIVE_TODOS:
         return !todo.completed
       case COMPLETED_TODOS:

@@ -22,6 +22,7 @@
     "files": [
         "./src/Utils.ts",
         "./src/actions/todos.ts",
+        "./src/actions/visibilityFilters.ts",
         "./src/constants/ActionTypes.ts",
         "./src/constants/KeyboardKeys.ts",
         "./src/constants/TodoFilters.ts",

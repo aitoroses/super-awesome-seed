@@ -6,6 +6,8 @@ import TodoApp from 'components/TodoApp'
 
 import {Todo} from '../reducers/todos'
 import * as TodoActions from '../actions/todos'
+import * as FilterActions from 'actions/visibilityFilters'
+
 
 export interface Props {
   todos: Array<Todo>
@@ -16,7 +18,7 @@ export interface Props {
 function mapStateToProps(state: Props) {
   return {
     todos: state.todos,
-    visibilyFilter: state.visibilityFilter
+    visibilityFilter: state.visibilityFilter
   }
 }
 
@@ -24,15 +26,16 @@ function mapStateToProps(state: Props) {
 export class TodoContainer extends React.Component<Props, any> {
 
   render() {
-
     const {todos, visibilityFilter, dispatch} = this.props
     const actions = bindActionCreators(TodoActions, dispatch)
+    const filterActions = bindActionCreators(FilterActions, dispatch)
 
     return (
       <div className='todoapp'>
         <TodoApp
           todos={todos}
           actions={actions}
+          filterActions={filterActions}
           visibilityFilter={visibilityFilter}
         />
       </div>
